@@ -114,6 +114,7 @@ export function RecurrencesTable({
           },
         ]}
         labels={tableLabels}
+        className="overflow-x-auto"
         pageSize={10}
       />
     </>

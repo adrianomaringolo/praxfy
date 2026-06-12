@@ -84,6 +84,7 @@ export function ContractsTable({ contracts }: { contracts: ContractRow[] }) {
           },
         ]}
         labels={tableLabels}
+        className="overflow-x-auto"
         pageSize={10}
       />
     </>

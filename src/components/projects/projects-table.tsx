@@ -103,6 +103,7 @@ export function ProjectsTable({
           },
         ]}
         labels={tableLabels}
+        className="overflow-x-auto"
         pageSize={10}
       />
     </>

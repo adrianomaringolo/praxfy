@@ -136,6 +136,7 @@ export function ClientsTable({ clients }: { clients: Client[] }) {
         columns={columns}
         searchFields={['name', 'email', 'phone']}
         labels={tableLabels}
+        className="overflow-x-auto"
         pageSize={10}
       />
 
