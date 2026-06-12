@@ -1,4 +1,5 @@
 import { AppShell } from '@/components/layout/app-shell'
+import { UpgradeBanner } from '@/components/billing/upgrade-banner'
 import { syncUser } from '@/actions/users'
 
 export default async function AppLayout({
@@ -7,5 +8,10 @@ export default async function AppLayout({
   children: React.ReactNode
 }) {
   await syncUser()
-  return <AppShell>{children}</AppShell>
+  return (
+    <AppShell>
+      <UpgradeBanner />
+      {children}
+    </AppShell>
+  )
 }
