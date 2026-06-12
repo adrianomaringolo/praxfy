@@ -11,7 +11,7 @@ import { getContractById } from '@/db/queries/contracts'
 import { getClientById } from '@/db/queries/clients'
 import { nextOccurrenceDate } from '@/lib/recurrence-dates'
 import { formatDate, todayISO } from '@/lib/format'
-import { EMAIL_FROM, resend } from '@/lib/resend'
+import { EMAIL_FROM, getResend } from '@/lib/resend'
 import RecurrenceAlert from '@/emails/recurrence-alert'
 
 export async function GET(request: Request) {
@@ -71,7 +71,7 @@ export async function GET(request: Request) {
           }
         }
 
-        await resend.emails.send({
+        await getResend().emails.send({
           from: EMAIL_FROM,
           to: recurrence.notifyEmails,
           subject: `Lembrete: ${recurrence.name}`,

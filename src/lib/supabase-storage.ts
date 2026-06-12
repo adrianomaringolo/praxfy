@@ -1,9 +1,17 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 
-export const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY! // service role para uploads server-side
-)
+let client: SupabaseClient | null = null
+
+/** Cliente Supabase sob demanda (service role — apenas server-side) */
+export function getSupabase() {
+  if (!client) {
+    client = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
+  }
+  return client
+}
 
 export async function uploadFile(
   bucket: string,
@@ -11,6 +19,7 @@ export async function uploadFile(
   file: Buffer,
   contentType: string
 ) {
+  const supabase = getSupabase()
   const { data, error } = await supabase.storage
     .from(bucket)
     .upload(path, file, { contentType, upsert: false })
@@ -19,6 +28,6 @@ export async function uploadFile(
 }
 
 export async function deleteFile(bucket: string, path: string) {
-  const { error } = await supabase.storage.from(bucket).remove([path])
+  const { error } = await getSupabase().storage.from(bucket).remove([path])
   if (error) throw error
 }
