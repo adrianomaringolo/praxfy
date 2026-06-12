@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ptBR } from "@clerk/localizations";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Toaster } from "@/components/layout/toaster";
 import "./globals.css";
 
 const inter = Inter({
@@ -30,6 +31,7 @@ export default function RootLayout({
       <html lang="pt-BR">
         <body className={`${inter.variable} ${plusJakarta.variable}`}>
           {children}
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

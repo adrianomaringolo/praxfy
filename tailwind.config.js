@@ -7,8 +7,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Tokens consumidos pelos componentes do buildgrid-ui (estilo shadcn),
+        // mapeados para a paleta Praxfy
+        background: '#f8f7ff',
+        foreground: '#1e1b4b',
+        card: { DEFAULT: '#ffffff', foreground: '#1e1b4b' },
+        popover: { DEFAULT: '#ffffff', foreground: '#1e1b4b' },
+        secondary: { DEFAULT: '#f1f0f9', foreground: '#312e81' },
+        muted: { DEFAULT: '#f1f0f9', foreground: '#6b7280' },
+        destructive: { DEFAULT: '#ef4444', foreground: '#ffffff' },
+        border: '#e5e7eb',
+        input: '#e5e7eb',
+        ring: '#6366f1',
+        tooltip: { DEFAULT: '#1e1b4b', foreground: '#ffffff' },
         // Primária — azul-ardósia (identidade, navegação, headers)
         primary: {
+          DEFAULT: '#4f46e5',
+          foreground: '#ffffff',
           50:  '#f0f4ff',
           100: '#e0e9ff',
           200: '#c7d7fe',
@@ -24,6 +39,7 @@ module.exports = {
         // Accent — índigo vibrante (CTAs, badges ativos, destaques)
         accent: {
           DEFAULT: '#6366f1',
+          foreground: '#ffffff',
           hover:   '#4f46e5',
           light:   '#e0e7ff',
         },
@@ -59,7 +75,21 @@ module.exports = {
         display: ['var(--font-display)', 'Plus Jakarta Sans', 'Inter', 'sans-serif'],
         mono:    ['JetBrains Mono', 'monospace'],
       },
+      keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+      },
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-animate')],
 }
