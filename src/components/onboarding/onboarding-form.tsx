@@ -5,17 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Button, Input, Label, toast } from 'buildgrid-ui'
 import { Plus, Trash2 } from 'lucide-react'
 import { createPipelineWithStages } from '@/actions/pipelines'
-
-export const STAGE_COLORS = [
-  '#6366f1', // índigo
-  '#3b82f6', // azul
-  '#06b6d4', // ciano
-  '#10b981', // verde
-  '#f59e0b', // âmbar
-  '#ef4444', // vermelho
-  '#ec4899', // rosa
-  '#8b5cf6', // violeta
-]
+import { STAGE_COLORS } from '@/lib/stage-colors'
 
 const MIN_STAGES = 3
 const MAX_STAGES = 5

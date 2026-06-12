@@ -1,4 +1,4 @@
-import { and, desc, eq } from 'drizzle-orm'
+import { and, count, desc, eq } from 'drizzle-orm'
 import { db } from '@/db'
 import {
   clients,
@@ -108,4 +108,20 @@ export async function toggleProjectToken(
     .where(and(eq(projects.id, id), eq(projects.userId, userId)))
     .returning()
   return project
+}
+
+export async function countProjectsByPipeline(pipelineId: string) {
+  const [{ value }] = await db
+    .select({ value: count() })
+    .from(projects)
+    .where(eq(projects.pipelineId, pipelineId))
+  return value
+}
+
+export async function countProjectsByStage(stageId: string) {
+  const [{ value }] = await db
+    .select({ value: count() })
+    .from(projects)
+    .where(eq(projects.currentStageId, stageId))
+  return value
 }

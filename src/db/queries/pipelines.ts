@@ -96,3 +96,21 @@ export async function updateStagesOrder(
 export async function deleteStage(id: string) {
   await db.delete(pipelineStages).where(eq(pipelineStages.id, id))
 }
+
+export async function getStageById(id: string) {
+  const [stage] = await db
+    .select()
+    .from(pipelineStages)
+    .where(eq(pipelineStages.id, id))
+  return stage
+}
+
+export async function getPipelinesWithStages(userId: string) {
+  const userPipelines = await getPipelines(userId)
+  return Promise.all(
+    userPipelines.map(async (pipeline) => ({
+      ...pipeline,
+      stages: await getStagesByPipeline(pipeline.id),
+    }))
+  )
+}
