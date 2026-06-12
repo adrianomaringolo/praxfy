@@ -43,3 +43,11 @@ export async function updateProjectLinkVisibility(
 export async function deleteProjectLink(id: string) {
   await db.delete(projectLinks).where(eq(projectLinks.id, id))
 }
+
+export async function getProjectLinkById(id: string) {
+  const [link] = await db
+    .select()
+    .from(projectLinks)
+    .where(eq(projectLinks.id, id))
+  return link
+}

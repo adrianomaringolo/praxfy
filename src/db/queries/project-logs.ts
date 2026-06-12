@@ -36,3 +36,11 @@ export async function updateProjectLogVisibility(
     .returning()
   return log
 }
+
+export async function getProjectLogById(id: string) {
+  const [log] = await db
+    .select()
+    .from(projectLogs)
+    .where(eq(projectLogs.id, id))
+  return log
+}
