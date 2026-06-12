@@ -35,3 +35,8 @@ export async function getUserByClerkId(clerkId: string) {
     .where(eq(users.clerkId, clerkId))
   return user
 }
+
+export async function getUserById(id: string) {
+  const [user] = await db.select().from(users).where(eq(users.id, id))
+  return user
+}
